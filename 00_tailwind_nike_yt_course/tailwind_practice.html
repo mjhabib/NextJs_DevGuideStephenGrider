@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind Play</title>
+</head>
+<body>
+
+   <main class="p-5">
+  <!-- getting started -->
+  <h1 class="text-center text-lg text-blue-600">Hello World</h1>
+  <div class="my-4 h-10 w-full rounded-lg border-2 border-violet-500 bg-violet-300 p-2">
+    <p class="text-center font-sans text-[20px] font-extrabold">this is my new paragraph</p>
+  </div>
+
+  <!-- layout -->
+  <div class="fixed top-0 h-10 w-10 bg-red-500"></div>
+  <div class="relative top-0 h-10 w-10 bg-orange-400"></div>
+
+  <!-- flexbox -->
+  <div class="flex justify-center space-x-6">
+    <div class="h-14 w-14 rounded-full bg-blue-400"></div>
+    <div class="h-14 w-14 rounded-full bg-blue-400"></div>
+    <div class="h-14 w-14 rounded-full bg-blue-400"></div>
+  </div>
+
+  <!-- grid system -->
+  <div class="mt-3 grid grid-cols-3 gap-2">
+    <div class="h-12 bg-violet-300"></div>
+    <div class="h-12 bg-violet-300"></div>
+    <div class="h-12 bg-violet-300"></div>
+  </div>
+
+  <br />
+
+  <!-- @media query -->
+  <div class="hidden md:block">
+    <p>Devices greater than 768</p>
+  </div>
+  <div class="hidden max-md:block">
+    <p>Devices less than 768</p>
+  </div>
+
+  <!-- hover effect -->
+  <button class="my-2 rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-900 focus:outline-none focus:ring-blue-300 active:bg-blue-900">Click here</button>
+
+  <ul class="my-2 space-y-2">
+    <li class="bg-white p-2 first:bg-yellow-200">item 1 is first</li>
+    <li class="bg-white p-2 first:bg-yellow-200">item 2 is not first</li>
+    <li class="p-2 odd:bg-blue-200 even:bg-lime-300">item 3 is odd</li>
+    <li class="p-2 odd:bg-blue-200 even:bg-lime-300">item 4 is even</li>
+  </ul>
+  <br />
+
+  <!-- Dark mode -->
+  <!-- in config=>  darkMode: "class"   -->
+  <div class="m-10 rounded-lg bg-white px-6 py-8 shadow-xl ring-1 ring-slate-500/5 dark:bg-black">
+    <h3 class="text-base font-medium tracking-tight text-slate-900 dark:text-white">This is just a text heading</h3>
+    <p class="test-slate-500 mt-2 text-sm dark:text-blue-200">This is a paragraph</p>
+    <button id="toggleDark" class="mt-8 rounded-md bg-blue-200 px-4 py-2 text-sm font-medium text-blue-900" onclick="document.body.classList.toggle('dark')">Toggle the dark mode</button>
+  </div>
+</main>
+
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggleDark = document.getElementById('toggleDark')
+    toggleDark.addEventListener('click', function() {
+      if(document.documentElement.classList.includes('dark')) {
+        document.documentElement.classList.remove('dark')
+      }
+      else {
+        document.documentElement.classList.add('dark')
+      }
+      alert("click!")
+    });
+  });
+</script>
+
+<!-- custom styles -->
+<div>
+  <p class="bg-stone-200 p-[16px] text-[30px] text-[#973F29]">Chestnut color</p>
+  <!-- or using config=>  extend: {  colors: { chestnut: '#973F29' }  -->
+  <p class="text-chestnut bg-stone-200 p-[16px] text-[25px]">Another chestnut color</p>
+</div>
+<br />
+
+<!-- ways to keep our code clean and short! -->
+<!--
+  1. breaking the layouts into seprate components
+  2. using directive,  CSS=> @layer components { .btn-directive { @apply ... }
+  3. or using component libraries like 'Shadcn', 'tailwind ui', 'headless ui'
+ -->
+ <button class="btn-directive">Directive class button</button>
+
+<br /><br /><br />
+
+      
+    
+</body>
+</html>

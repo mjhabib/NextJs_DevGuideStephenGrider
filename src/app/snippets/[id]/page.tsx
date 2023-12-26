@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { db } from "@/db";
+import * as actions from "@/actions";
 
 interface SnippetShowPageProps {
   params: {
@@ -22,6 +23,9 @@ export default async function SnippetShowPage(props: SnippetShowPageProps) {
     notFound();
   }
 
+  const deleteSnippetAction = actions.deleteSnippet.bind(null, snippet.id);
+  // we use bind here to convert the type of our id (number) to string because when we are dealing with forms, we need to pass on the type of string
+
   return (
     <div>
       <div className="flex justify-between m-4 items-center">
@@ -33,9 +37,9 @@ export default async function SnippetShowPage(props: SnippetShowPageProps) {
           >
             Edit
           </Link>
-          <Link href={`/snippets`} className="p-2 border rounded">
-            Delete
-          </Link>
+          <form action={deleteSnippetAction}>
+            <button className="p-2 border rounded">Delete</button>
+          </form>
         </div>
       </div>
       <pre className="p-3 border rounded bg-gray-200 border-gray-200">

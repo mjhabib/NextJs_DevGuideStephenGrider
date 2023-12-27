@@ -1,26 +1,13 @@
-import { db } from "@/db";
-import { redirect } from "next/navigation";
+"use client";
+
+import * as actions from "@/actions";
+import { useFormState } from "react-dom";
 
 export default function CreateSnippetPage() {
-  async function createSnippet(formDate: FormData) {
-    "use server";
-    const title = formDate.get("title") as string;
-    const code = formDate.get("code") as string;
-    // the 'title' & 'code' come from our form 'name property'
-    // 'as string' tells TS we are getting string data from our form not other types of data like a file (because we can also submit a file to a form)
-
-    const snippet = await db.snippet.create({
-      data: {
-        title: title,
-        code: code,
-        // since these keys/values are identical, we could shorten them out to just 'title,' and 'code'
-      },
-    });
-    redirect("/");
-  }
+  const [formState, action] = useFormState(actions.createSnippet, { msg: "" });
 
   return (
-    <form action={createSnippet}>
+    <form action={action}>
       <h3 className="font-bold m-3">Create a Snippet!</h3>
       <div className="flex flex-col gap-4">
         <div className="flex gap-4">
@@ -44,6 +31,8 @@ export default function CreateSnippetPage() {
             id="code"
           />
         </div>
+
+        {formState.msg ? <div className="my-2 p-2 bg-red-200 border rounded border-red-400">{formState.msg}</div> : null}
 
         <button className="rounded p-2 bg-blue-200" type="submit">
           Create

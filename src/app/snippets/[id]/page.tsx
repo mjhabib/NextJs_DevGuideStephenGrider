@@ -48,3 +48,14 @@ export default async function SnippetShowPage(props: SnippetShowPageProps) {
     </div>
   );
 }
+
+// since during build time the next.js treat this page under the wildcard [id] into a dynamic page, we lose the benefit of caching. we can fix that by adding the function below with the exact name of 'generateStaticParams'
+export async function generateStaticParams() {
+  const snippets = await db.snippet.findMany();
+
+  return snippets.map((snippet) => {
+    return {
+      id: snippet.id.toString(),
+    };
+  });
+}

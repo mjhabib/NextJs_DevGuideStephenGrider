@@ -3,12 +3,16 @@
 "use server";
 import { db } from "@/db";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
+// to use 'on-demand caching' whenever we make changes to our app and want to show the latest results to the user
 
 export async function editSnippet(id: number, code: string) {
   await db.snippet.update({
     where: { id },
     data: { code },
   });
+
+  revalidatePath(`/snippets/${id}`);
   redirect(`/snippets/${id}`);
 }
 
@@ -16,6 +20,8 @@ export async function deleteSnippet(id: number) {
   await db.snippet.delete({
     where: { id },
   });
+
+  revalidatePath("/");
   redirect("/");
 }
 
@@ -45,7 +51,6 @@ export async function createSnippet(
 
     // throw new Error("Failed to save data into the database.");
     // just by throwing an error here without any try-catch, the next.js is gonna call the error page which does not contains the functions of this page which is not very user-friendly, instead we want show an error msg to the user so he/she can try again.
-    
   } catch (err: unknown) {
     if (err instanceof Error) {
       return { msg: err.message };
@@ -53,5 +58,7 @@ export async function createSnippet(
       return { msg: "Something went wrong!" };
     }
   }
+  
+  revalidatePath("/");
   redirect("/");
 }

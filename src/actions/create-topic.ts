@@ -32,13 +32,14 @@ export async function createTopic(
   formState: CreateTopicFormState,
   formData: FormData
 ): Promise<CreateTopicFormState> {
-  // we need Promise to make sure both of these types are the same
+  // if the arg's types here do not match with the state in 'topic-create-form', we will get an error there.
+  // we need 'Promise type' to make sure our function itself returns a value with its arg's type. And we use 'Promise' because it is an async function.
 
-  // we get these data (name, description) from our form in the 'topic-create-form' page
   const result = createTopicSchema.safeParse({
     name: formData.get("name"),
     description: formData.get("description"),
   });
+  // we get these data (name, description) from our form in the 'topic-create-form' page
 
   // form validation
   if (!result.success) {

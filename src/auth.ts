@@ -32,4 +32,6 @@ export const {
       return session;
     },
   },
+  trustHost: true,
+  // Necessary to test this web-app in an unsecure network (i.e. localhost) without getting any errors during production mode (npm run build, npm run start)
 });

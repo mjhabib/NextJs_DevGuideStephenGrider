@@ -1,13 +1,8 @@
 "use client";
 import { useSession } from "next-auth/react";
 import * as actions from "@/actions";
-import Link from "next/link";
 import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
   NavbarItem,
-  Input,
   Button,
   Avatar,
   Popover,

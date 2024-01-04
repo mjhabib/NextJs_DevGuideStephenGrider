@@ -1,12 +1,13 @@
 import HeaderAuth from "./header-auth";
 import Link from "next/link";
+import { Suspense } from "react";
 import {
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Input,
 } from "@nextui-org/react";
+import SearchInput from "./search-input";
 
 export default function Header() {
   return (
@@ -19,7 +20,10 @@ export default function Header() {
 
       <NavbarContent justify="center">
         <NavbarItem>
-          <Input />
+          {/* we used this suspense here only to solve a warning in production mode, related to 'useSearchParams' hook we're using */}
+          <Suspense>
+            <SearchInput />
+          </Suspense>
         </NavbarItem>
       </NavbarContent>
 

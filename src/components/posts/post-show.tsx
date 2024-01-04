@@ -6,6 +6,9 @@ interface PostShowProps {
 }
 
 export default async function PostShow({ postId }: PostShowProps) {
+  // this delay is here only to test the 'Streaming with Suspense' & 'Loading Skeleton' feature
+  await new Promise((resolve) => setTimeout(resolve, 2500));
+  
   const post = await db.post.findFirst({
     where: { id: postId },
   });
